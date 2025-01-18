@@ -1,0 +1,125 @@
+---
+title: "Analyzing the Relationship Between Crime Rates and Weather Conditions in Colchester"
+author: "Abhishek Aher"
+date: "2025-01-18"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+ # Load necessary libraries
+library(tidyverse)  # For data manipulation and visualization
+library(lubridate)  # For handling date objects
+library(ggplot2)    # For creating static plots
+library(plotly)     # For interactive plots
+library(leaflet)    # For creating interactive maps
+
+# Load datasets
+crime_data <- read.csv("C:/Users/ABHISHEK/Desktop/projects/crime23.csv")
+weather_data <- read.csv("C:/Users/ABHISHEK/Desktop/projects/temp2023.csv")
+```
+```{r}
+# Format date columns
+crime_data$date <- as.Date(crime_data$date, format = "%Y-%m-%d")
+weather_data$Date <- as.Date(weather_data$Date, format = "%Y-%m-%d")
+```
+```{r}
+# Analyze seasonal crime trends
+crime_seasonal <- crime_data %>%
+mutate(month = lubridate::month(date, label = TRUE)) %>% group_by(month, category) %>% summarize(total_crimes = n())
+
+
+```
+```{r}
+ggplot(crime_data, aes(x = category)) +
+  geom_bar(fill = "blue") +
+  theme_minimal() +
+  labs(title = "Number of Crimes by Category", x = "Category", y="Frequency")
+```
+```{r}
+ggplot(weather_data, aes(x = TemperatureCAvg)) +
+  geom_histogram(binwidth = 1, fill = "cyan", color = "black") +
+  geom_density(aes(y = ..density..), colour = "red") +
+  labs(title = "Distribution of Daily Average Temperatures", x = "Temperature (C)",y="Density")
+```
+
+```{r}
+ggplot(weather_data, aes(x = factor(1), y = TemperatureCAvg)) +
+  geom_boxplot(fill = "lightgreen") +
+  labs(title = "Boxplot of Daily Average Temperatures", x = "", y = "Temperature(C)")
+```
+
+
+
+
+```{r}
+# Visualization: Seasonal trends in crime data
+ggplot(crime_seasonal, aes(x = month, y = total_crimes, fill = category)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(
+    title = "Seasonal Trends in Crime Data",
+    x = "Month",
+    y = "Total Crimes"
+  ) +
+  theme_minimal()
+```
+
+
+
+```{r}
+
+crime_counts <- crime_data %>% group_by(date) %>% summarize(count = n())
+combined_data <- left_join(crime_counts, weather_data, by = c("date" = "Date"))
+
+ggplot(combined_data, aes(x = TemperatureCAvg, y = count)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  labs(title = "Crime Rate vs. Daily Average Temperature", x = "Average Temperature (C)", y ="CrimeCount")
+```
+
+
+```{r}
+# Check for missing values in key columns
+summary(combined_data$TemperatureCAvg)
+summary(combined_data$count)
+
+# Check how many rows have complete cases (no NAs)
+sum(complete.cases(combined_data))
+
+# Remove rows with NAs in relevant columns
+combined_data <- combined_data %>% filter(!is.na(TemperatureCAvg) & !is.na(count))
+
+# Check date ranges in datasets
+range(crime_data$date)
+range(weather_data$Date)
+
+# Verify row count
+nrow(combined_data)
+```
+
+```{r}
+# Perform correlation test if sufficient data points are available
+if (nrow(combined_data) > 2) {
+  cor_test <- cor.test(combined_data$TemperatureCAvg, combined_data$count, method = "pearson")
+  print(cor_test)
+} else {
+  print("Not enough data points for correlation test.")
+}
+```
+
+```{r}
+# Visualize crime locations on an interactive map
+leaflet(crime_data) %>%
+  addTiles() %>%
+  addCircleMarkers(~long, ~lat, popup = ~as.character(category), radius = 4, fillColor = "red", color = "red")
+
+```
+```{r}
+gg <- ggplot(crime_data, aes(x = category)) +
+  geom_bar(fill = "blue") +
+  labs(title = "Interactive: Number of Crimes by Category", x = "Category", y = "Frequency")
+ggplotly(gg)
+```
