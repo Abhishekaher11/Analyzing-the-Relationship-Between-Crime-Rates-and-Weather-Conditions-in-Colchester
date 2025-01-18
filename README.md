@@ -1,0 +1,2 @@
+# Analyzing-the-Relationship-Between-Crime-Rates-and-Weather-Conditions-in-Colchester
+This project explores the interconnections between weather conditions and crime patterns in Colchester during 2023. Using datasets on street-level crimes and daily weather metrics, it examines how climatic factors like temperature, precipitation, and wind impact crime trends, providing actionable insights for urban safety and planning.
