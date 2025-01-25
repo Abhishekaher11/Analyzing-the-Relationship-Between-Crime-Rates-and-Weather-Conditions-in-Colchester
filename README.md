@@ -1,51 +1,32 @@
-# Analyzing-the-Relationship-Between-Crime-Rates-and-Weather-Conditions-in-Colchester
-# **Exploring Weather and Crime Interconnections in Colchester (2023)**
+# **Analyzing the Relationship Between Crime Rates and Weather Conditions in Colchester**
 
-## **Overview**
-This project explores the interconnections between weather conditions and crime patterns in Colchester during 2023. Using datasets on street-level crimes and daily weather metrics, it examines how climatic factors like temperature, precipitation, and wind impact crime trends, providing actionable insights for urban safety and planning.
+## **Exploring Weather and Crime Interconnections in Colchester (2023)**
 
 ---
 
-## **Features**
-- **Data Integration**: Combines crime and weather datasets for comprehensive analysis.
-- **Descriptive Analysis**: Summary statistics and visualizations of crime and weather data.
-- **Temporal Analysis**: Investigates seasonal trends in crime rates and weather patterns.
-- **Spatial Analysis**: Highlights crime hotspots and their correlation with weather conditions.
+### **Overview**
+This project explores the relationship between weather conditions and crime patterns in Colchester during 2023. Using datasets on street-level crimes and daily weather metrics, it examines how climatic factors like temperature, precipitation, and wind impact crime trends. The analysis provides actionable insights for improving urban safety and planning.
+
+---
+
+### **Features**
+- **Data Integration**: Combines crime and weather datasets for a comprehensive analysis.
+- **Descriptive Analysis**: Provides summary statistics and visualizations for both crime and weather data.
+- **Temporal Analysis**: Explores seasonal and monthly trends in crime rates and weather conditions.
+- **Spatial Analysis**: Utilizes interactive maps to highlight crime hotspots and their relationship with weather conditions.
 - **Correlation Analysis**: Quantifies the relationship between weather factors and crime rates.
 
 ---
 
-## **Technologies**
-- **Programming**: Python
-- **Libraries**:
-  - **Pandas**: Data manipulation
-  - **NumPy**: Numerical operations
-  - **Matplotlib & Seaborn**: Data visualization
-  - **GeoPandas**: Spatial data analysis
-- **Tools**: Jupyter Notebooks for analysis and visualization
-- **Dataset**: Crime and weather data for Colchester (2023)
+### **Technologies**
+- **Programming Language**: R
+- **Libraries Used**:
+  - **tidyverse**: Data manipulation and analysis
+  - **lubridate**: Handling and formatting date objects
+  - **ggplot2**: Static visualization
+  - **plotly**: Interactive visualization
+  - **leaflet**: Interactive mapping
+- **Tools**: RStudio, interactive plotting tools
+- **Datasets**: Crime data and weather data for Colchester (2023)
 
 ---
-
-## **Key Insights**
-- Seasonal weather variations show significant correlations with specific crime categories.
-- Spatial visualizations reveal crime hotspots aligned with distinct weather conditions.
-- Quantitative metrics provide a foundation for targeted interventions in urban safety.
-
----
-
-## **Resources**
-- **Readme**: Comprehensive documentation of the project.
-- **Activity**: Monitors updates and contributions.
-- **Stars**: Support and recognition from the community.
-- **Forks**: Open to collaboration and extension.
-- **Releases**: Future updates to be published here.
-
----
-
-## **About**
-This project examines the impact of weather on crime patterns in Colchester, providing actionable insights for urban planning and safety initiatives.
-
----
-
- 
